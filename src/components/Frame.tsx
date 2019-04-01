@@ -269,6 +269,8 @@ class Frame extends React.Component<Props, State> {
       additionalDefs: additionalDefs
     })
 
+    console.log("frame size", size)
+
     return (
       <SpanOrDiv
         span={useSpans}
@@ -309,7 +311,8 @@ class Frame extends React.Component<Props, State> {
                 )}
                 {axesTickLines && (
                   <g
-                    transform={`translate(${margin.left},${margin.top})`}
+                    transform={`translate(${adjustedPosition[0] +
+                      margin.left},${adjustedPosition[1] + margin.top})`}
                     key="visualization-tick-lines"
                     className={"axis axis-tick-lines"}
                     aria-hidden={true}

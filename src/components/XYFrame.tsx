@@ -544,7 +544,8 @@ class XYFrame extends React.Component<XYFrameProps, XYFrameState> {
       xAccessor,
       useSummariesAsInteractionLayer,
       useAreasAsInteractionLayer = useSummariesAsInteractionLayer,
-      baseMarkProps
+      baseMarkProps,
+      inset
     } = currentProps
     let {
       projectedLines,
@@ -643,8 +644,14 @@ class XYFrame extends React.Component<XYFrameProps, XYFrameState> {
     })
     const { adjustedPosition, adjustedSize } = adjustedPositionSize({
       size: currentProps.size,
-      margin
+      margin,
+      inset
     })
+
+    console.log("size", currentProps.size)
+    console.log("margin", margin)
+    console.log("adjustedPosition", adjustedPosition)
+    console.log("adjustedSize", adjustedSize)
 
     let calculatedXExtent = [],
       calculatedYExtent = [],
@@ -805,8 +812,10 @@ class XYFrame extends React.Component<XYFrameProps, XYFrameState> {
           orient: d.orient,
           size: axisSize,
           footer: d.footer,
-          tickSize: d.tickSize
+          tickSize: d.tickSize,
+          baseline: d.baseline
         })
+
         const axisTickLines = (
           <g key={`axes-tick-lines-${i}`} className={`axis ${axisClassname}`}>
             {axisLines({
@@ -814,7 +823,8 @@ class XYFrame extends React.Component<XYFrameProps, XYFrameState> {
               orient: d.orient,
               tickLineGenerator: d.tickLineGenerator,
               baseMarkProps,
-              className: axisClassname
+              className: axisClassname,
+              baseline: d.baseline
             })}
           </g>
         )
